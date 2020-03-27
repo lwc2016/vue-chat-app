@@ -13,14 +13,5 @@ create table if not exists users_table(
     createdTime dateTime default now()
 )
 
--- 修改users_table中的avatar字段
-alter table users_table modify avatar varchar(128);
-
--- 创建朋友表
-create table if not exists friends_table(
-    id int primary key auto_increment,
-    fromId int not null,
-    toId int not null,
-    remarkName varchar(32),
-    createdTime dateTime default not()
-);
+-- 查询全部用户
+select * from users_table;
