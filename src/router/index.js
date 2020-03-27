@@ -4,6 +4,9 @@ import Login from '@/views/login'
 import Register from '@/views/register'
 import Layout from '@/views/layout'
 import MainLayout from '@/views/main-layout'
+import MessageList from '@/views/message-list'
+import FriendList from '@/views/friend-list'
+import Person from '@/views/person'
 
 Vue.use(VueRouter)
 
@@ -15,7 +18,15 @@ const routes = [
     component: Layout,
     children:
     [
-      { path: '/', component: MainLayout }
+      {
+        path: '/',
+        component: MainLayout,
+        children: [
+          { path: '/', component: MessageList, name: 'message-list' },
+          { path: '/friend/list', component: FriendList, name: 'friend-list' },
+          { path: '/person', component: Person, name: 'person' }
+        ]
+      }
     ]
   }
 ]
