@@ -7,6 +7,7 @@ import MainLayout from '@/views/main-layout'
 import MessageList from '@/views/message-list'
 import FriendList from '@/views/friend-list'
 import Person from '@/views/person'
+import FriendDetail from '@/views/friend-detail'
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,8 @@ const routes = [
           { path: '/friend/list', component: FriendList, name: 'friend-list' },
           { path: '/person', component: Person, name: 'person' }
         ]
-      }
+      },
+      { path: '/friend/:id', component: FriendDetail, name: 'friend-detail' }
     ]
   }
 ]
