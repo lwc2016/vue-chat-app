@@ -1,9 +1,13 @@
 <template>
-    <button :class="{
+    <button
+      type="button"
+      :class="{
         'button': true,
         'primary-btn': type === 'primary',
         'danger-btn': type === 'danger'
-    }"><slot /></button>
+      }"
+      @click="$emit('click')"
+    ><slot /></button>
 </template>
 <script>
 export default {

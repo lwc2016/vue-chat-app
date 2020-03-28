@@ -1,17 +1,27 @@
-import { userInfo } from '../../services/user'
+import { userInfo, userLogin } from '../../services/user'
 
 export default {
   namespaced: true,
   state: {
     isLogined: false,
+    isFetched: false,
     info: {}
   },
-  mutations: {},
+  mutations: {
+    setDetail (state, info) {
+      state.info = info
+      state.isLogined = true
+      state.isFetched = true
+    }
+  },
   actions: {
-    fetchDetail () {
-      userInfo().then(resp => {
-        console.log(resp)
-      })
+    async fetchDetail ({ commit }) {
+      const resp = await userInfo()
+      commit('setDetail', resp)
+    },
+    async login ({ commit }, payload) {
+      const resp = await userLogin(payload)
+      commit('setDetail', resp)
     }
   }
 }

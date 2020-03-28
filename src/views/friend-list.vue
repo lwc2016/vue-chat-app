@@ -1,5 +1,8 @@
 <template>
     <div>
+        <c-session>
+            <c-session-item>添加好友</c-session-item>
+        </c-session>
         <h3 class="title">我的朋友</h3>
         <div class="list">
             <router-link to="/friend/2" class="friend">

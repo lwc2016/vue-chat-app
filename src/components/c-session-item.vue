@@ -1,7 +1,9 @@
 <template>
     <div class="session-item">
         <div>
-            <div class="title">{{title}}</div>
+            <div class="title">
+              <slot />
+            </div>
         </div>
         <div>
             <div class="right-text"></div>
@@ -33,7 +35,7 @@ export default {
 .title{
     font-size: 28/@r;
     color: #4f4f4f;
-    font-weight: 500;
+    font-weight: bold;
 }
 .arrow{
     width: 36/@r;

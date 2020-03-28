@@ -1,14 +1,14 @@
 <template>
     <div>
-        <c-form class="form">
-            <c-form-item>
-              <c-input placeholder="用户名" />
+        <c-form ref="form" :form='form' :rules="rules" class="form">
+            <c-form-item prop="name">
+              <c-input v-model="form.name" placeholder="用户名" />
+            </c-form-item>
+            <c-form-item prop="password">
+              <c-input v-model="form.password" type="password" placeholder="密码" />
             </c-form-item>
             <c-form-item>
-              <c-input placeholder="密码" />
-            </c-form-item>
-            <c-form-item>
-              <c-button>登录</c-button>
+              <c-button @click='handleSubmit'>登录</c-button>
             </c-form-item>
         </c-form>
         <p class="notice">
@@ -17,7 +17,36 @@
     </div>
 </template>
 <script>
-export default {}
+import message from '@/components/message'
+export default {
+  data () {
+    return {
+      form: {
+        name: '',
+        password: ''
+      },
+      rules: {
+        name: [{ required: true, message: '请填写用户名！' }],
+        password: [{ required: true, message: '请填写密码！' }]
+      }
+    }
+  },
+  methods: {
+    handleSubmit () {
+      this.$refs.form.validate(error => {
+        if (error) {
+          return this.$create(message, { type: 'error', text: error[0].message }).show()
+        }
+        this.$store.dispatch('user/login', { ...this.form }).then(resp => {
+          this.$message.success('登录成功！')
+          this.$router.push('/')
+        }).catch(error => {
+          this.$message.error(error)
+        })
+      })
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 .form{

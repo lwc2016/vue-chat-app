@@ -8,7 +8,7 @@ module.exports = (rules) => async (ctx, next) => {
     }catch(error){
         ctx.body = {
             status: 400,
-            message: error
+            message: Object.values(error)[0] 
         }
         return null;
     }

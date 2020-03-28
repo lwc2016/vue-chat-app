@@ -1,6 +1,11 @@
 <template>
-    <input class="input" v-bind="$attrs" />
+    <input class="input" v-bind="$attrs" :value="value" @input="event => $emit('input', event.target.value)" />
 </template>
+<script>
+export default {
+  props: ['value']
+}
+</script>
 <style lang="less" scoped>
     .input{
         width: 100%;

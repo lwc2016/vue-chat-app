@@ -18,7 +18,7 @@
             </c-form-item>
         </c-form>
         <p class="notice">
-          <router-link to='/register'>已有账号？立即登录</router-link>
+          <router-link to='/login'>已有账号？立即登录</router-link>
         </p>
     </div>
 </template>

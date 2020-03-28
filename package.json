@@ -10,6 +10,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "async-validator": "^3.2.4",
     "axios": "^0.19.2",
     "co-mysql": "^1.0.0",
     "core-js": "^3.6.4",

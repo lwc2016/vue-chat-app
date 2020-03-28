@@ -1,6 +1,6 @@
 <template>
     <div>
-        <c-profile />
+        <c-profile :data="$store.state.user.info" />
         <c-session class="body">
           <c-session-item title="设置" />
         </c-session>

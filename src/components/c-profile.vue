@@ -1,15 +1,22 @@
 <template>
     <div class="info">
-        <img class="avatar" src="http://p2.ifengimg.com/a/2018_31/2dd37bca611f306_size220_w1024_h1027.jpg" />
+        <img class="avatar" :src="data.avatar" />
         <div class="content">
-            <h3 class="nickName">赵丽颖</h3>
-            <p class="item"><span>账号：</span><span>zhaoliying</span></p>
-            <p class="item"><span>备注：</span><span>平安就是福气</span></p>
+            <h3 class="nickName">{{data.nickName}}</h3>
+            <p class="item"><span>账号：</span><span>{{data.name}}</span></p>
+            <p class="item"><span>备注：</span><span>{{data.remarks}}</span></p>
         </div>
     </div>
 </template>
 <script>
-export default {}
+export default {
+  props: {
+    data: {
+      type: Object,
+      default: () => ({})
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
     .info{

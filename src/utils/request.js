@@ -21,6 +21,7 @@ request.interceptors.response.use(function (response) {
   }
   return data.result
 }, function (error) {
+  console.log(error)
   return Promise.reject(error)
 })
 
