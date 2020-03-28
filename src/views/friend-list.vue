@@ -42,22 +42,24 @@ export default {}
 .title{
     padding: 0 24/@r;
     font-size: 30/@r;
-    line-height: 80/@r;
-    height: 80/@r;
+    line-height: 60/@r;
+    font-weight: 500;
+    height: 60/@r;
+    color: #333333;
 }
 .list{
     background-color: #ffffff;
     padding-left: 24/@r;
 }
 .friend{
-    padding: 10px 24px 10px 0px;
+    padding: 20/@r 24/@r 20/@r 0;
     display: flex;
     align-items: center;
     .logo{
         width: 80/@r;
         height: 80/@r;
         overflow: hidden;
-        border-radius: 4/@r;
+        border-radius: 6/@r;
         img{
             width: 100%;
         }

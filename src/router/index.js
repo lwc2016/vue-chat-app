@@ -8,6 +8,7 @@ import MessageList from '@/views/message-list'
 import FriendList from '@/views/friend-list'
 import Person from '@/views/person'
 import FriendDetail from '@/views/friend-detail'
+import ChatRoom from '@/views/chat-room'
 
 Vue.use(VueRouter)
 
@@ -28,7 +29,8 @@ const routes = [
           { path: '/person', component: Person, name: 'person' }
         ]
       },
-      { path: '/friend/:id', component: FriendDetail, name: 'friend-detail' }
+      { path: '/friend/:id', component: FriendDetail, name: 'friend-detail' },
+      { path: '/chatRoom/:id', component: ChatRoom, name: 'chat-room' }
     ]
   }
 ]
