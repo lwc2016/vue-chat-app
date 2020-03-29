@@ -10,6 +10,7 @@ function install (Vue) {
           ws.onmessage = (message) => {
             // 解析信息
             const data = JSON.parse(message.data)
+            data.isRead = this.$route.name === 'chat-room'
             // 将信息推送到message中
             this.$store.commit('message/push', data)
           }

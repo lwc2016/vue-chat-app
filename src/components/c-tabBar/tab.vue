@@ -2,6 +2,7 @@
     <router-link :to="path" class="tab">
         <div class="tab-icon">
             <img :src="active ? activeIcon: icon" />
+            <div v-if="count" class='count'>{{count}}</div>
         </div>
         <div :class="{'tab-text': true, 'tab-text-active': active}">{{title}}</div>
     </router-link>
@@ -13,7 +14,8 @@ export default {
     'icon',
     'activeIcon',
     'active',
-    'title'
+    'title',
+    'count'
   ]
 }
 </script>
@@ -28,8 +30,22 @@ export default {
 .tab-icon{
     width: 50/@r;
     height: 50/@r;
+    position: relative;
    img{
      width: 100%;
+   }
+   .count{
+     position: absolute;
+     width: 32/@r;
+     height: 32/@r;
+     background-color: @danger;
+     top: -6/@r;
+     right: -16/@r;
+     border-radius: 100%;
+     font-size: 20/@r;
+     color: #ffffff;
+     text-align: center;
+     line-height: 32/@r;
    }
 }
 .tab-text{

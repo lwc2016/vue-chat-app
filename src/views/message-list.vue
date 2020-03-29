@@ -2,58 +2,43 @@
     <div>
         <h3 class="title">好友消息</h3>
         <div class="messages">
-            <router-link to="/chatRoom/1" class="message">
+            <router-link v-for="item in messages" :key="item.id" :to="`/chatRoom/${item.fromId}`" class="message">
                 <div class="left">
                     <div class="logo">
-                        <img src="http://img3.cache.netease.com/photo/0026/2016-09-22/C1J71ODR3ONH0026.jpg" />
+                        <img :src="item.avatar" />
                     </div>
-                    <div class="count">12</div>
+                    <div v-if="item.notReadCount" class="count">{{item.notReadCount}}</div>
                 </div>
                 <div class="info">
-                    <h3 class="name">东方不败</h3>
-                    <p class="content">睡觉了吗？</p>
-                </div>
-            </router-link>
-            <router-link to="/chatRoom/1" class="message">
-                <div class="left">
-                    <div class="logo">
-                        <img src="http://img3.cache.netease.com/photo/0026/2016-09-22/C1J71ODR3ONH0026.jpg" />
-                    </div>
-                    <div class="count">12</div>
-                </div>
-                <div class="info">
-                    <h3 class="name">东方不败</h3>
-                    <p class="content">睡觉了吗？</p>
-                </div>
-            </router-link>
-            <router-link to="/chatRoom/1" class="message">
-                <div class="left">
-                    <div class="logo">
-                        <img src="http://img3.cache.netease.com/photo/0026/2016-09-22/C1J71ODR3ONH0026.jpg" />
-                    </div>
-                    <div class="count">12</div>
-                </div>
-                <div class="info">
-                    <h3 class="name">东方不败</h3>
-                    <p class="content">睡觉了吗？</p>
-                </div>
-            </router-link>
-            <router-link to="/chatRoom/1" class="message">
-                <div class="left">
-                    <div class="logo">
-                        <img src="http://img3.cache.netease.com/photo/0026/2016-09-22/C1J71ODR3ONH0026.jpg" />
-                    </div>
-                    <div class="count">12</div>
-                </div>
-                <div class="info">
-                    <h3 class="name">东方不败</h3>
-                    <p class="content">睡觉了吗？</p>
+                    <h3 class="name">{{item.nickName}}</h3>
+                    <p class="content">{{item.content}}</p>
                 </div>
             </router-link>
         </div>
     </div>
 </template>
-<script></script>
+<script>
+export default {
+  computed: {
+    messages () {
+      const list = []
+      this.$store.state.message.list.forEach(item => {
+        const index = list.findIndex(option => option.fromId === item.fromId)
+        if (index >= 0) {
+          list[index].notReadCount += (item.isRead ? 0 : 1)
+          list[index] = { ...list[index], item }
+        } else {
+          const { nickName, avatar } = this.$store.state.friend.list.find(option => parseInt(option.userId) === parseInt(item.fromId)) || {}
+          item.notReadCount = item.isRead ? 0 : 1
+          list.push({ ...item, nickName, avatar })
+        }
+      })
+      console.log(list)
+      return list
+    }
+  }
+}
+</script>
 <style lang="less" scoped>
 .title{
     padding: 0 24/@r;

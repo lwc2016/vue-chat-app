@@ -18,10 +18,21 @@ export default {
   data () {
     return {
       navs: [
-        { path: '/', icon: messageIcon, activeIcon: messageActiveIcon, title: '消息' },
+        { path: '/', icon: messageIcon, activeIcon: messageActiveIcon, title: '消息', count: 0 },
         { path: '/friend/list', icon: friendsIcon, activeIcon: friendsActiveIcon, title: '好友' },
         { path: '/person', icon: userIcon, activeIcon: userActiveIcon, title: '我的' }
       ]
+    }
+  },
+  mounted () {
+    this.navs[0].count = this.$store.getters['message/total']
+  },
+  watch: {
+    '$store.getters': {
+      handler: function (newValue) {
+        this.navs[0].count = newValue['message/total']
+      },
+      deep: true
     }
   }
 }
