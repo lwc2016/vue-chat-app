@@ -1,5 +1,6 @@
 const userRoute = require("./user.route");
 const invitationRoute = require("./invitation.route");
+const friendRoute = require("./friend.route");
 
 module.exports = (app) => {
    // 用户相关路由
@@ -10,4 +11,7 @@ module.exports = (app) => {
    app.use(invitationRoute.routes())
       .use(invitationRoute.allowedMethods());
 
+   // 好友相关的路由
+   app.use(friendRoute.routes())
+      .use(friendRoute.allowedMethods())
 };

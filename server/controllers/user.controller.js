@@ -9,6 +9,7 @@ exports.login = async (ctx, next) => {
     const [ user ] = await db.query("select id, name, nickName, avatar, remarks, createdTime from users_table where name = ? and password = ?", [name, _password]);
     if(user){
         ctx.session.user = user;
+        ctx.cookies.set('uid', user.id, { maxAge: 24 * 60 * 60 * 1000});
         ctx.body = {status: 200, result: user, message: ""};
     }else{
         ctx.body = {status: 400, result: "", message: "用户名或密码错误！"};
@@ -54,3 +55,10 @@ exports.update = async (ctx, next) => {
     ]);
     ctx.body = {status: 200, result: "", message: ""};
 };
+
+// 用户搜索
+exports.search = async (ctx, next) => {
+    const { keyword } = ctx.request.body;
+    const users = await db.query('select id, name, nickName, avatar, remarks, createdTime from users_table where isValid = 1 and name like ? or nickName like ?', [`%${keyword}%` , `%${keyword}%`]);
+    ctx.body = {status: 200, result: users, message: ""};
+}

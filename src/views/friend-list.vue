@@ -5,41 +5,27 @@
         </c-session>
         <h3 class="title">我的朋友</h3>
         <div class="list">
-            <router-link to="/friend/2" class="friend">
-                <div class="logo">
-                    <img src="https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=be9f02e9b5315c60579863bdecd8a076/8326cffc1e178a82e760d15cff03738da877e8ea.jpg" />
-                </div>
-                <div class="name">欧阳娜娜</div>
-            </router-link>
-            <router-link to="/friend/2" class="friend">
-                <div class="logo">
-                    <img src="https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=be9f02e9b5315c60579863bdecd8a076/8326cffc1e178a82e760d15cff03738da877e8ea.jpg" />
-                </div>
-                <div class="name">欧阳娜娜</div>
-            </router-link>
-            <router-link to="/friend/2" class="friend">
-                <div class="logo">
-                    <img src="https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=be9f02e9b5315c60579863bdecd8a076/8326cffc1e178a82e760d15cff03738da877e8ea.jpg" />
-                </div>
-                <div class="name">欧阳娜娜</div>
-            </router-link>
-            <router-link to="/friend/2" class="friend">
-                <div class="logo">
-                    <img src="https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=be9f02e9b5315c60579863bdecd8a076/8326cffc1e178a82e760d15cff03738da877e8ea.jpg" />
-                </div>
-                <div class="name">欧阳娜娜</div>
-            </router-link>
-            <router-link to="/friend/2" class="friend">
-                <div class="logo">
-                    <img src="https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=be9f02e9b5315c60579863bdecd8a076/8326cffc1e178a82e760d15cff03738da877e8ea.jpg" />
-                </div>
-                <div class="name">欧阳娜娜</div>
-            </router-link>
+            <c-friend v-for="item in list" :key="item.id" :data="item" />
         </div>
     </div>
 </template>
 <script>
-export default {}
+import { friendList } from '@/services/friend'
+export default {
+  data () {
+    return {
+      list: []
+    }
+  },
+  created () {
+    this.fetchList()
+  },
+  methods: {
+    async fetchList () {
+      this.list = await friendList()
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 .title{

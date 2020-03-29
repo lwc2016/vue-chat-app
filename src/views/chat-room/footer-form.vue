@@ -1,9 +1,10 @@
 <template>
     <div class="footer">
-        <div class="pictrue-icon">
+        <!-- <div class="pictrue-icon">
             <img :src="pictureIcon" />
-        </div>
-        <div class="input-content" contenteditable="true"></div>
+        </div> -->
+        <div ref="content" class="input-content" contenteditable="true"></div>
+        <c-button @click="handleSubmit" class="button">发送</c-button>
     </div>
 </template>
 <script>
@@ -12,6 +13,16 @@ export default {
   data () {
     return {
       pictureIcon
+    }
+  },
+  methods: {
+    handleSubmit () {
+      const content = this.$refs.content.textContent
+      const { id: userId } = this.$route.params
+      if (content) {
+        this.$ws.send(JSON.stringify({ content, toId: userId, type: 'text' }))
+        this.$refs.content.textContent = ''
+      }
     }
   }
 }
@@ -45,5 +56,9 @@ export default {
     border-radius: 4/@r;
     font-size: 28/@r;
     box-sizing: border-box;
+}
+.button{
+    width: 120/@r!important;
+    margin-left: 10/@r;
 }
 </style>

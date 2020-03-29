@@ -4,5 +4,13 @@ create table if not exists friends_table(
     fromId int not null,
     toId int not null,
     remarkName varchar(32),
+    isValid tinyint default 1,
     createdTime dateTime default now()
 );
+
+-- 添加好友
+insert into friends_table (fromId, toId) values (1, 2), (2, 1);
+insert into friends_table (fromId, toId) values (1, 3), (3, 1);
+
+-- 获取好友
+select friends_table.id as id, users_table.id as userId, name, nickName, avatar from friends_table left join users_table on friends_table.toId = users_table.id where fromId = 1 and friends_table.isValid = 1;

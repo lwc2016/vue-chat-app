@@ -6,8 +6,11 @@ import CTabBar from './c-tabBar'
 import CSession from './c-session'
 import CSessionItem from './c-session-item'
 import CProfile from './c-profile'
+import CFriend from './c-friend'
+import CTitle from './c-title'
 import create from '../utils/create'
 import message from './message'
+import CTextarea from './c-textarea'
 
 const install = function (Vue) {
   Vue.component('c-form', CForm)
@@ -18,6 +21,9 @@ const install = function (Vue) {
   Vue.component('c-session', CSession)
   Vue.component('c-session-item', CSessionItem)
   Vue.component('c-profile', CProfile)
+  Vue.component('c-friend', CFriend)
+  Vue.component('c-title', CTitle)
+  Vue.component('c-textarea', CTextarea)
 
   Vue.prototype.$message = {
     success: (text) => create(message, { type: 'success', text }).show(),

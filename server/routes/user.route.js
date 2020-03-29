@@ -24,10 +24,7 @@ router.post("/register",
 );
 
 // 获取当前登录用户信息
-router.post("/info", 
-    authMiddleware(),
-    userController.info
-);
+router.post("/info", authMiddleware(), userController.info);
 
 // 获取用户信息
 router.post("/detail", 
@@ -39,9 +36,9 @@ router.post("/detail",
 );
 
 // 更新当前登录的用户信息
-router.post("/update", 
-    authMiddleware(), 
-    userController.update
-);
+router.post("/update", authMiddleware(), userController.update);
+
+// 搜索用户
+router.post('/search', authMiddleware(),userController.search);
 
 module.exports = router;
