@@ -32,6 +32,9 @@ export default {
     justify-content: space-between;
     padding-right: 24/@r;
 }
+.session-item + .session-item{
+  border-top: 1px solid #e5e5e5;
+}
 .title{
     font-size: 28/@r;
     color: #4f4f4f;

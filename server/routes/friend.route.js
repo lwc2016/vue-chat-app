@@ -5,6 +5,6 @@ const authMiddleware = require("../middlewares/auth.middleware");
 const friendController = require("../controllers/friend.controller");
 
 // 好友列表
-router.post("/list", friendController.list);
+router.post("/list", authMiddleware(), friendController.list);
 
 module.exports = router;

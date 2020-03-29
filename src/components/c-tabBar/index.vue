@@ -47,5 +47,6 @@ export default {
     border-top: 1px solid #d5d5d5;
     background-color: @white;
     display: flex;
+    z-index: 100;
 }
 </style>

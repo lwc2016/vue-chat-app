@@ -10,6 +10,7 @@ import CFriend from './c-friend'
 import CTitle from './c-title'
 import create from '../utils/create'
 import message from './message'
+import modal from './modal'
 import CTextarea from './c-textarea'
 
 const install = function (Vue) {
@@ -28,6 +29,9 @@ const install = function (Vue) {
   Vue.prototype.$message = {
     success: (text) => create(message, { type: 'success', text }).show(),
     error: (text) => create(message, { type: 'error', text }).show()
+  }
+  Vue.prototype.$modal = {
+    confirm: props => create(modal, props).show()
   }
 }
 

@@ -17,7 +17,6 @@
     </div>
 </template>
 <script>
-import message from '@/components/message'
 export default {
   data () {
     return {
@@ -35,7 +34,7 @@ export default {
     handleSubmit () {
       this.$refs.form.validate(error => {
         if (error) {
-          return this.$create(message, { type: 'error', text: error[0].message }).show()
+          return this.$message.error(error[0].message)
         }
         this.$store.dispatch('user/login', { ...this.form }).then(resp => {
           this.$message.success('登录成功！')

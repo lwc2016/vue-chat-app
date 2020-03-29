@@ -10,7 +10,7 @@ export default (Comp, props) => {
   document.body.appendChild(comp.$el)
   // 4. 定义销毁方法
   comp.remove = function () {
-    comp.$destory()
+    comp.$destroy()
     document.body.removeChild(comp.$el)
   }
 

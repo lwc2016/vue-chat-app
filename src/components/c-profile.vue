@@ -1,19 +1,25 @@
 <template>
     <div class="info">
-        <img class="avatar" :src="data.avatar" />
+        <img class="avatar" :src="data.avatar || avatarIcon" />
         <div class="content">
             <h3 class="nickName">{{data.nickName}}</h3>
             <p class="item"><span>账号：</span><span>{{data.name}}</span></p>
-            <p class="item"><span>备注：</span><span>{{data.remarks}}</span></p>
+            <p class="item"><span>备注：</span><span>{{data.remarks || '这人很懒什么都没有留下'}}</span></p>
         </div>
     </div>
 </template>
 <script>
+import avatarIcon from '@/assets/avatar.png'
 export default {
   props: {
     data: {
       type: Object,
       default: () => ({})
+    }
+  },
+  data () {
+    return {
+      avatarIcon
     }
   }
 }

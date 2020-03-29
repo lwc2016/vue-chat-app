@@ -33,6 +33,7 @@ export default {
     },
     hide () {
       this.isShow = false
+      setTimeout(this.remove, 1000)
     }
   }
 }

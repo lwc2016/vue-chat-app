@@ -5,28 +5,10 @@
         </c-session>
         <h3 class="title">我的朋友</h3>
         <div class="list">
-            <c-friend v-for="item in list" :key="item.id" :data="item" />
+            <c-friend v-for="item in $store.state.friend.list" :key="item.id" :data="item" />
         </div>
     </div>
 </template>
-<script>
-import { friendList } from '@/services/friend'
-export default {
-  data () {
-    return {
-      list: []
-    }
-  },
-  created () {
-    this.fetchList()
-  },
-  methods: {
-    async fetchList () {
-      this.list = await friendList()
-    }
-  }
-}
-</script>
 <style lang="less" scoped>
 .title{
     padding: 0 24/@r;
