@@ -1,5 +1,6 @@
 <template>
-    <div class="session-item">
+    <div class="item">
+      <router-link :to="path" v-if="path" class="session-item">
         <div>
             <div class="title">
               <slot />
@@ -9,14 +10,29 @@
             <div class="right-text"></div>
             <img class="arrow" :src="arrowIcon" />
         </div>
+      </router-link>
+      <div v-else @click="$emit('click')" class="session-item">
+          <div>
+              <div class="title">
+                <slot />
+              </div>
+          </div>
+          <div>
+              <div class="right-text"></div>
+              <img class="arrow" :src="arrowIcon" />
+          </div>
+      </div>
     </div>
 </template>
 <script>
 import arrowIcon from '@/assets/arrow.png'
 export default {
-  props: [
-    'title'
-  ],
+  props: {
+    path: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {
       arrowIcon
@@ -32,7 +48,7 @@ export default {
     justify-content: space-between;
     padding-right: 24/@r;
 }
-.session-item + .session-item{
+.item + .item{
   border-top: 1px solid #e5e5e5;
 }
 .title{

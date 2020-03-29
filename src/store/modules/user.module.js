@@ -12,6 +12,10 @@ export default {
       state.info = info
       state.isLogined = true
       state.isFetched = true
+    },
+    clearDetail (state) {
+      state.info = {}
+      state.isLogined = false
     }
   },
   actions: {

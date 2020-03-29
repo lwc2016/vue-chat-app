@@ -2,7 +2,12 @@
     <div>
         <h3 class="title">好友消息</h3>
         <div class="messages">
-            <router-link v-for="item in messages" :key="item.id" :to="`/chatRoom/${item.fromId}`" class="message">
+            <router-link
+                v-for="item in messages"
+                :key="item.id"
+                :to="$store.state.user.info.id == item.fromId ? `/chatRoom/${item.toId}`:  `/chatRoom/${item.fromId}`"
+                class="message"
+            >
                 <div class="left">
                     <div class="logo">
                         <img :src="item.avatar" />
@@ -23,12 +28,19 @@ export default {
     messages () {
       const list = []
       this.$store.state.message.list.forEach(item => {
-        const index = list.findIndex(option => option.fromId === item.fromId)
+        const index = list.findIndex(option => option.fromId === item.fromId || option.toId === item.fromId)
         if (index >= 0) {
           list[index].notReadCount += (item.isRead ? 0 : 1)
-          list[index] = { ...list[index], item }
+          console.log(item)
+          list[index] = { ...list[index], ...item }
         } else {
-          const { nickName, avatar } = this.$store.state.friend.list.find(option => parseInt(option.userId) === parseInt(item.fromId)) || {}
+          const { nickName, avatar } = this.$store.state.friend.list.find(option => {
+            if (parseInt(this.$store.state.user.info.id) === parseInt(item.fromId)) {
+              return parseInt(option.userId) === parseInt(item.toId)
+            } else {
+              return parseInt(option.userId) === parseInt(item.fromId)
+            }
+          }) || {}
           item.notReadCount = item.isRead ? 0 : 1
           list.push({ ...item, nickName, avatar })
         }

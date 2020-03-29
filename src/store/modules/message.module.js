@@ -20,6 +20,11 @@ export default {
       })
       // 保存消息
       localStorage.setItem('messages', JSON.stringify(state.list))
+    },
+    clear (state) {
+      // 清除消息
+      state.list = []
+      localStorage.removeItem('messages')
     }
   },
   getters: {

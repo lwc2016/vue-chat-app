@@ -16,6 +16,12 @@ exports.login = async (ctx, next) => {
     }
 };
 
+// 退出登录
+exports.logout = async (ctx, next) => {
+    ctx.session.user = null;
+    ctx.body = {status: 200, result: ""};
+}
+
 // 注册
 exports.register = async (ctx, next) => {
     const { name, nickName, password } = ctx.request.body;

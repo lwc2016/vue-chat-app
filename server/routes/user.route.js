@@ -13,6 +13,9 @@ router.post("/login",
     userController.login
 );
 
+// 退出登录
+router.post("/logout", validatorMiddleware(), userController.logout);
+
 // 注册
 router.post("/register", 
     validatorMiddleware({

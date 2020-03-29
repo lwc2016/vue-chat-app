@@ -14,7 +14,7 @@ module.exports = (server, app) => {
         // 将用户存储到store中
         if(uid) store.set(uid, socket);
         // 判断用户是否有缓存的消息
-        const a = redisClient.llen(`chat-app-${uid}-messages`, (err, data) => {
+        redisClient.llen(`chat-app-${uid}-messages`, (err, data) => {
             if(data >= 0){
                 for(let i = 0; i < data; i ++){
                     redisClient.lpop(`chat-app-${uid}-messages`, (err, data) => {
@@ -23,7 +23,6 @@ module.exports = (server, app) => {
                 }
             }
         })
-        console.log('当前在线客户：', store.size, store.keys());
 
         socket.on("message", function(message){
             console.log("客户端说:", message);
@@ -36,6 +35,7 @@ module.exports = (server, app) => {
             // 将数据发送给好友
             const friendWs = store.get(data.toId);
             if(friendWs){
+              console.log('-------')  
               // 如果用户在线，则直接发送给用户
               friendWs.send(JSON.stringify(data));
             } else {

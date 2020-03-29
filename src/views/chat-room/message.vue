@@ -5,7 +5,7 @@
             'message-right': isSelf
         }"
     >
-        <img class="avatar" src='http://www.aspku.com/uploads/allimg/190819/221H3Mc-7.jpg' />
+        <img class="avatar" :src='data.avatar' />
         <div class="message-content">
             <div :class="isSelf ? 'arrow-right' : 'arrow-left'"></div>
             <span>{{data.content}}</span>
@@ -22,7 +22,6 @@ export default {
   },
   computed: {
     isSelf () {
-      console.log(parseInt(this.$store.state.user.info.id) === parseInt(this.data.fromId))
       return parseInt(this.$store.state.user.info.id) === parseInt(this.data.fromId)
     }
   }

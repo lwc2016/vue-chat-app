@@ -8,24 +8,38 @@
           <c-session-item>
             <template>我的邀请</template>
           </c-session-item>
-          <c-session-item>
-            <template>消除清除</template>
+          <c-session-item @click="handleClear">
+            <template>信息清除</template>
           </c-session-item>
         </c-session>
         <div class="buttons">
-          <c-button @click="handleLagout" type="danger">退出登录</c-button>
+          <c-button @click="handleLogout" type="danger">退出登录</c-button>
         </div>
     </div>
 </template>
 <script>
+import { userLogout } from '@/services/user'
 export default {
   methods: {
-    handleLagout () {
+    handleLogout () {
       this.$modal.confirm({
         title: '提示信息',
         body: '确定需要退出登录吗？',
+        onOk: async () => {
+          await userLogout()
+          this.$store.commit('user/clearDetail')
+          this.$message.success('退出登录成功！')
+          this.$router.push('/')
+        }
+      })
+    },
+    handleClear () {
+      this.$modal.confirm({
+        title: '提示信息',
+        body: '确定需要清除信息吗？',
         onOk: () => {
-          console.log('okk')
+          this.$store.commit('message/clear')
+          this.$message.success('信息清除成功！')
         }
       })
     }
