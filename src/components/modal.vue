@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="box">
         <transition name="fade">
             <div v-if="isShow" class="mask"></div>
         </transition>
@@ -52,7 +52,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.wrapper{
+.box{
     position: relative;
 }
 .mask{
@@ -65,7 +65,7 @@ export default {
     z-index: 100;
 }
 .modal{
-    position: absolute;
+    position: fixed;
     margin: 0 auto;
     top: 50%;
     left: 50%;

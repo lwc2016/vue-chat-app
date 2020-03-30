@@ -39,9 +39,6 @@ export default {
 .message-right{
     flex-direction: row-reverse;
 }
-.message-item:nth-child(1){
-    margin-top: 20/@r;
-}
 .avatar-box{
     width: 80/@r;
     height: 80/@r;

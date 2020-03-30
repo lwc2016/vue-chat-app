@@ -31,8 +31,10 @@ export default {
 
 .footer{
     position: fixed;
-    width: 100%;
+    width: 750/@r;
     left: 0;
+    right: 0;
+    margin: 0 auto;
     bottom: 0;
     background-color: #ffffff;
     padding: 20/@r 24/@r;

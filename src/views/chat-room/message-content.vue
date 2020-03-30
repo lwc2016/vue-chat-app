@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="messages">
       <message v-for="(item, index) in list" :key="index" :data="item" />
     </div>
 </template>
@@ -26,3 +26,8 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+.messages{
+  padding-top: 20/@r;
+}
+</style>

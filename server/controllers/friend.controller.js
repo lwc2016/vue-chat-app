@@ -30,7 +30,8 @@ exports.detail = async (ctx, next) => {
         avatar,
         remarkName
         from friends_table left join users_table on friends_table.toId = users_table.id 
-        where friends_table.id = ? and fromId = 1 and friends_table.isValid = 1;`, [id, userId])
+        where friends_table.id = ? and fromId = ? and friends_table.isValid = 1;`, [id, userId])
+    console.log(friend); 
     ctx.body = {status: 200, result: friend};
 };
 
