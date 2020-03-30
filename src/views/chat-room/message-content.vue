@@ -20,7 +20,6 @@ export default {
         }
         return item
       })
-      console.log(list)
       return list
     }
   }
