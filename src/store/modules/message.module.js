@@ -21,6 +21,15 @@ export default {
       // 保存消息
       localStorage.setItem('messages', JSON.stringify(state.list))
     },
+    setReadById (state, payload) {
+      state.list.forEach(item => {
+        if (parseInt(item.id) === parseInt(payload)) {
+          item.isRead = true
+        }
+      })
+      // 保存消息
+      localStorage.setItem('messages', JSON.stringify(state.list))
+    },
     clear (state) {
       // 清除消息
       state.list = []

@@ -16,8 +16,9 @@ export default {
       detail: {}
     }
   },
-  created () {
+  mounted () {
     this.fetchDetail()
+    this.$store.commit('message/setReadById', this.$route.params.id)
   },
   methods: {
     async fetchDetail () {

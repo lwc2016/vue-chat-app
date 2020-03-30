@@ -14,5 +14,10 @@ export default {
       const resp = await friendList()
       commit('setList', resp)
     }
+  },
+  computed: {
+    total (state) {
+      return state.list.length
+    }
   }
 }

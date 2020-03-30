@@ -28,7 +28,7 @@ router.post("/refuse",
     validatorMiddleware({
         id: [{required: true, message: "缺少必要参数"}]
     }),
-    invitationController.agree
+    invitationController.refuse
 );
 
 // 详情

@@ -28,8 +28,7 @@ exports.send = async (ctx, next) => {
         users_table.remarks as remarks
         from invitations_table left join users_table 
         on invitations_table.fromId = users_table.id 
-        where fromId = ? and toId = ?;`, [fromId, toId]) || {};
-    console.log(fromId, toId, invitation2);    
+        where fromId = ? and toId = ? order by invitations_table.id desc;`, [fromId, toId]) || {};
     publishClient.publish("invitation", JSON.stringify({type: "system", subType: "invitation_received", ...invitation2}));
     ctx.body = {status: 200, result: "", message: ""};
 };
@@ -61,8 +60,21 @@ exports.refuse = async (ctx, next) => {
     }
     // 更新状态
     await db.query("update invitations_table set status = 'refused' where id = ? and toId = ?", [id, userId]);
-    const { fromId, toId } = invitation;
-    await db.query("insert into friends_table (fromId, toId) values (?, ?), (?, ?)", [fromId, toId, toId, fromId]);
+    const [ invitation2 ] = await db.query(`
+        select 
+        invitations_table.id as id, 
+        nickName, 
+        avatar, 
+        fromId, 
+        toId,
+        users_table.remarks as remarks
+        from invitations_table left join users_table 
+        on invitations_table.toId = users_table.id 
+        where invitations_table.id = ?;`, [id]) || {};
+    const { toId, fromId } = invitation2;
+    invitation2.toId = fromId;
+    invitation2.fromId = toId;  
+    publishClient.publish('invitation', JSON.stringify({type: "system", subType: "invitation_refused", ...invitation2}))
     ctx.body = {status: 200, message: ""};
 };
 

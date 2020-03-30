@@ -6,7 +6,7 @@
         >
             <div class="left">
                 <div class="logo">
-                    <img :src="imgUrl" />
+                    <img :src="imgUrl || defaultIcon" />
                 </div>
                 <div v-if="count" class="count">{{count}}</div>
             </div>
@@ -22,8 +22,12 @@
     </div>
 </template>
 <script>
+import defaultIcon from '@/assets/avatar.png'
 export default {
-  props: ['path', 'imgUrl', 'count']
+  props: ['path', 'imgUrl', 'count'],
+  data () {
+    return { defaultIcon }
+  }
 }
 </script>
 <style lang="less" scoped>

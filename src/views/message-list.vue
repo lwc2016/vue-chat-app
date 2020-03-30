@@ -11,7 +11,10 @@
               :count="item.isRead ? 0 : 1"
             >
               <template v-slot:primary>{{item.nickName}}</template>
-              <template v-slot:secondary>请求加为好友，({{item.remarks}})</template>
+              <template v-slot:secondary>
+                <div v-if="item.subType === 'invitation_received'">请求加为好友，({{item.remarks}})</div>
+                <div v-if="item.subType === 'invitation_refused'">拒绝加你为好友！</div>
+              </template>
             </c-list-item>
           </c-session>
         </div>
@@ -30,6 +33,7 @@
               </c-list-item>
           </c-session>
         </div>
+        <c-empty v-if="$store.state.message.list.length === 0" title="～ 暂无消息 ～" />
     </div>
 </template>
 <script>
