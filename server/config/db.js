@@ -3,7 +3,7 @@ const co = require("co-mysql");
 
 const connection = mysql.createPool({
     connectionLimit: 10,
-    host: "localhost",
+    host: "127.0.0.1",
     port: 3306,
     user: "root",
     password: "12345678",
