@@ -12,3 +12,5 @@ export const userRegister = data => request.post('/user/register', data)
 export const userSearch = data => request.post('/user/search', data)
 // 用户详情
 export const userDetail = data => request.post('/user/detail', data)
+// 编辑个人信息
+export const userUpdate = data => request.post('/user/update', data)

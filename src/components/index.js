@@ -12,6 +12,7 @@ import create from '../utils/create'
 import message from './message'
 import modal from './modal'
 import CTextarea from './c-textarea'
+import CListItem from './c-list-item'
 
 const install = function (Vue) {
   Vue.component('c-form', CForm)
@@ -25,6 +26,7 @@ const install = function (Vue) {
   Vue.component('c-friend', CFriend)
   Vue.component('c-title', CTitle)
   Vue.component('c-textarea', CTextarea)
+  Vue.component('c-list-item', CListItem)
 
   Vue.prototype.$message = {
     success: (text) => create(message, { type: 'success', text }).show(),

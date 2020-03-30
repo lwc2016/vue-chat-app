@@ -4,9 +4,17 @@
             <c-session-item>添加好友</c-session-item>
         </c-session>
         <h3 class="title">我的朋友</h3>
-        <div class="list">
-            <c-friend v-for="item in $store.state.friend.list" :key="item.id" :data="item" />
-        </div>
+        <c-session>
+            <c-list-item
+               v-for="item in $store.state.friend.list"
+               :key="item.id"
+               :path="`/friend/${item.id}`"
+               :imgUrl="item.avatar"
+            >
+               <template v-slot:primary>{{item.remarkName || item.nickName}}</template>
+               <template v-slot:secondary><span>用户名：</span>{{item.name}}</template>
+            </c-list-item>
+        </c-session>
     </div>
 </template>
 <style lang="less" scoped>
@@ -21,28 +29,5 @@
 .list{
     background-color: #ffffff;
     padding-left: 24/@r;
-}
-.friend{
-    padding: 20/@r 24/@r 20/@r 0;
-    display: flex;
-    align-items: center;
-    .logo{
-        width: 80/@r;
-        height: 80/@r;
-        overflow: hidden;
-        border-radius: 6/@r;
-        img{
-            width: 100%;
-        }
-    }
-    .name{
-        font-size: 30/@r;
-        color: #4f4f4f;
-        margin-left: 20/@r;
-        font-weight: bold;
-    }
-}
-.friend + .friend{
-    border-top: 1px solid #e5e5e5;
 }
 </style>

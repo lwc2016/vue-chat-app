@@ -7,6 +7,7 @@ import MainLayout from '@/views/main-layout'
 import MessageList from '@/views/message-list'
 import FriendList from '@/views/friend-list'
 import Person from '@/views/person'
+import PersonEdit from '@/views/person-edit'
 import FriendDetail from '@/views/friend-detail'
 import FriendSearch from '@/views/friend-search'
 import ChatRoom from '@/views/chat-room'
@@ -32,7 +33,8 @@ const routes = [
       },
       { path: '/friend/search', component: FriendSearch, name: 'friend-search' },
       { path: '/friend/:id', component: FriendDetail, name: 'friend-detail' },
-      { path: '/chatRoom/:id', component: ChatRoom, name: 'chat-room' }
+      { path: '/chatRoom/:id', component: ChatRoom, name: 'chat-room' },
+      { path: '/person/edit', component: PersonEdit, name: 'person-edit' }
     ]
   }
 ]

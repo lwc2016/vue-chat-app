@@ -2,22 +2,21 @@
     <div>
         <c-profile :data="detail" />
         <c-form class="form">
-           <c-form-item>
-            <c-textarea placeholder="请填写备注" />
+           <c-form-item class="form-group">
+            <c-input v-model="detail.remarkName" placeholder="填写备注" />
+            <c-button @click="handleUpdate" class="save-btn">保存</c-button>
            </c-form-item>
         </c-form>
         <div class="buttons">
-            <router-link :to="`/chatRoom/${detail.id}`">
+            <router-link :to="`/chatRoom/${detail.userId}`">
               <c-button>发消息</c-button>
             </router-link>
-            <c-button @click='handleAdd' type="primary" class="button">添加好友</c-button>
             <c-button type="danger" class="button">删除好友</c-button>
         </div>
     </div>
 </template>
 <script>
-import { userDetail } from '@/services/user'
-import { invitationSend } from '@/services/invitation'
+import { friendDetail, friendUpdate } from '@/services/friend'
 export default {
   data () {
     return {
@@ -29,11 +28,12 @@ export default {
   },
   methods: {
     async fetchDetail () {
-      this.detail = await userDetail({ id: this.$route.params.id })
+      this.detail = await friendDetail({ id: this.$route.params.id })
     },
-    async handleAdd () {
-      await invitationSend({ userId: this.detail.id })
-      this.$message.success('邀请发送成功！')
+    async handleUpdate () {
+      await friendUpdate({ id: this.$route.params.id, remarkName: this.detail.remarkName })
+      this.$store.dispatch('friend/fetchList')
+      this.$message.success('修改备注成功！')
     }
   }
 }
@@ -46,7 +46,14 @@ export default {
     margin: 0 24/@r;
     margin-top: 80/@r;
 }
+.form-group{
+  display: flex;
+}
 .button{
     margin-bottom: 20/@r;
+}
+.save-btn{
+  width: 120/@r!important;
+  margin-left: 10/@r;
 }
 </style>

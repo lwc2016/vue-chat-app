@@ -2,6 +2,9 @@
     <div>
         <c-profile :data="$store.state.user.info" />
         <c-session class="body">
+          <c-session-item path="/person/edit">
+            <template>修改个人信息</template>
+          </c-session-item>
           <c-session-item>
             <template>好友邀请</template>
           </c-session-item>
@@ -9,7 +12,7 @@
             <template>我的邀请</template>
           </c-session-item>
           <c-session-item @click="handleClear">
-            <template>信息清除</template>
+            <template>清除消息记录</template>
           </c-session-item>
         </c-session>
         <div class="buttons">

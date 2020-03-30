@@ -1,8 +1,10 @@
 <template>
     <div class="info">
-        <img class="avatar" :src="data.avatar || avatarIcon" />
+        <div class="avatar-box">
+          <img class="avatar" :src="data.avatar || avatarIcon" />
+        </div>
         <div class="content">
-            <h3 class="nickName">{{data.nickName}}</h3>
+            <h3 class="nickName">{{data.remarkName || data.nickName}}</h3>
             <p class="item"><span>账号：</span><span>{{data.name}}</span></p>
             <p class="item"><span>备注：</span><span>{{data.remarks || '这人很懒什么都没有留下'}}</span></p>
         </div>
@@ -29,9 +31,14 @@ export default {
         padding: 20/@r 24/@r;
         background-color: #ffffff;
         display: flex;
+        .avatar-box{
+          width: 120/@r;
+          height: 120/@r;
+          overflow: hidden;
+          border-radius: 6/@r;
+        }
         .avatar{
-            width: 120/@r;
-            height: 120/@r;
+            width: 100%;
             border-radius: 6/@r;
         }
         .content{

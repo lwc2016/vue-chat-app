@@ -14,3 +14,6 @@ insert into friends_table (fromId, toId) values (1, 3), (3, 1);
 
 -- 获取好友
 select friends_table.id as id, users_table.id as userId, name, nickName, avatar from friends_table left join users_table on friends_table.toId = users_table.id where fromId = 1 and friends_table.isValid = 1;
+
+-- 好友详情
+select friends_table.id as id, users_table.id as userId, name, nickName, avatar from friends_table left join users_table on friends_table.toId = users_table.id where friends_table.id = 3 and fromId = 1 and friends_table.isValid = 1;

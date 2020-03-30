@@ -5,7 +5,9 @@
             'message-right': isSelf
         }"
     >
-        <img class="avatar" :src='data.avatar' />
+        <div class="avatar-box">
+            <img class="avatar" :src='data.avatar' />
+        </div>
         <div class="message-content">
             <div :class="isSelf ? 'arrow-right' : 'arrow-left'"></div>
             <span>{{data.content}}</span>
@@ -40,12 +42,12 @@ export default {
 .message-item:nth-child(1){
     margin-top: 20/@r;
 }
-.avatar{
+.avatar-box{
     width: 80/@r;
     height: 80/@r;
     border-radius: 6/@r;
     overflow: hidden;
-    img{
+    .avatar{
         width: 100%;
     }
 }
