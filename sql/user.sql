@@ -10,8 +10,8 @@ create table if not exists users_table(
     password varchar(32) not null,
     remarks varchar(128),
     isValid tinyint not null default 1,
-    createdTime dateTime default now()
-)
+    createdTime timestamp default NOW()
+);
 
 -- 查询全部用户
 select * from users_table;

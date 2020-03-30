@@ -5,7 +5,7 @@ create table if not exists friends_table(
     toId int not null,
     remarkName varchar(32),
     isValid tinyint default 1,
-    createdTime dateTime default now()
+    createdTime timestamp default now()
 );
 
 -- 添加好友
