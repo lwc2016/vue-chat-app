@@ -37,14 +37,14 @@ exports.send = async (ctx, next) => {
 // 接收邀请
 exports.agree = async (ctx, next) => {
     const { id: userId } = ctx.session.user;
-    const { invitationId } = ctx.request.body;
+    const { id } = ctx.request.body;
     // 查询邀请
-    const [ invitation ] = await db.query("select fromId, toId from invitations_table where id = ? and toId = ?", [invitationId, userId]);
+    const [ invitation ] = await db.query("select fromId, toId from invitations_table where id = ? and toId = ?", [id, userId]);
     if(!invitation){
         return ctx.body = {status: 400, message: "添加好友邀请不存在！"};
     }
     // 更新状态
-    await db.query("update invitations_table set status = agreed where id = ? and toId = ?", [invitationId, userId]);
+    await db.query("update invitations_table set status = 'agreed' where id = ? and toId = ?", [id, userId]);
     const { fromId, toId } = invitation;
     await db.query("insert into friends_table (fromId, toId) values (?, ?), (?, ?)", [fromId, toId, toId, fromId]);
     ctx.body = {status: 200, message: ""};
@@ -52,7 +52,18 @@ exports.agree = async (ctx, next) => {
 
 // 拒绝邀请
 exports.refuse = async (ctx, next) => {
-
+    const { id: userId } = ctx.session.user;
+    const { id } = ctx.request.body;
+    // 查询邀请
+    const [ invitation ] = await db.query("select fromId, toId from invitations_table where id = ? and toId = ?", [id, userId]);
+    if(!invitation){
+        return ctx.body = {status: 400, message: "添加好友邀请不存在！"};
+    }
+    // 更新状态
+    await db.query("update invitations_table set status = 'refused' where id = ? and toId = ?", [id, userId]);
+    const { fromId, toId } = invitation;
+    await db.query("insert into friends_table (fromId, toId) values (?, ?), (?, ?)", [fromId, toId, toId, fromId]);
+    ctx.body = {status: 200, message: ""};
 };
 
 

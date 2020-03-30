@@ -1,31 +1,35 @@
 <template>
     <div>
-        <c-title>系统消息</c-title>
-        <c-session>
-          <c-list-item
-            v-for="item in invitations"
-            :path="`/invitation/${item.id}`"
-            :key="item.id"
-            :imgUrl="item.avatar"
-            :count="item.isRead ? 0 : 1"
-          >
-            <template v-slot:primary>{{item.nickName}}</template>
-            <template v-slot:secondary>请求加为好友，({{item.remarks}})</template>
-          </c-list-item>
-        </c-session>
-        <c-title>好友消息</c-title>
-        <c-session>
+        <div v-if="invitations.length > 0">
+          <c-title>系统消息</c-title>
+          <c-session>
             <c-list-item
-                v-for="item in messages"
-                :path="$store.state.user.info.id == item.fromId ? `/chatRoom/${item.toId}`:  `/chatRoom/${item.fromId}`"
-                :imgUrl="item.avatar"
-                :key="item.id"
-                :count="item.notReadCount"
+              v-for="item in invitations"
+              :path="`/invitation/${item.id}`"
+              :key="item.id"
+              :imgUrl="item.avatar"
+              :count="item.isRead ? 0 : 1"
             >
               <template v-slot:primary>{{item.nickName}}</template>
-              <template v-slot:secondary>{{item.content}}</template>
+              <template v-slot:secondary>请求加为好友，({{item.remarks}})</template>
             </c-list-item>
-        </c-session>
+          </c-session>
+        </div>
+        <div v-if="messages.length > 0">
+          <c-title>好友消息</c-title>
+          <c-session>
+              <c-list-item
+                  v-for="item in messages"
+                  :path="$store.state.user.info.id == item.fromId ? `/chatRoom/${item.toId}`:  `/chatRoom/${item.fromId}`"
+                  :imgUrl="item.avatar"
+                  :key="item.id"
+                  :count="item.notReadCount"
+              >
+                <template v-slot:primary>{{item.nickName}}</template>
+                <template v-slot:secondary>{{item.content}}</template>
+              </c-list-item>
+          </c-session>
+        </div>
     </div>
 </template>
 <script>

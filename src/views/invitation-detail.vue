@@ -1,19 +1,15 @@
 <template>
     <div>
         <c-profile :data="detail" />
-        <c-form class="form">
-           <c-form-item>
-            <c-textarea placeholder="请填写备注" />
-           </c-form-item>
-        </c-form>
+        <div class="text">{{detail.invitationRemarks}}</div>
         <div class="buttons">
-            <c-button @click='handleAdd' type="primary" class="button">添加好友</c-button>
-            <c-button type="danger" class="button">删除好友</c-button>
+          <c-button @click="handleRefuse" type="danger" class="button">拒绝</c-button>
+          <c-button @click='handleAgree' type="primary" class="button">同意</c-button>
         </div>
     </div>
 </template>
 <script>
-import { invitationSend, invitationDetail } from '@/services/invitation'
+import { invitationDetail, invitationAgree, invitationRefuse } from '@/services/invitation'
 export default {
   data () {
     return {
@@ -27,13 +23,13 @@ export default {
     async fetchDetail () {
       this.detail = await invitationDetail({ id: this.$route.params.id })
     },
-    async handleAdd () {
-      try {
-        await invitationSend({ userId: this.detail.id })
-        this.$message.success('邀请发送成功！')
-      } catch (error) {
-        console.log(error)
-      }
+    async handleAgree () {
+      await invitationAgree({ id: this.$route.params.id })
+      this.$message.success('好友添加成功！')
+    },
+    async handleRefuse () {
+      await invitationRefuse({ id: this.$route.params.id })
+      this.$message.success('拒绝成功！')
     }
   }
 }
@@ -45,8 +41,23 @@ export default {
 .buttons{
     margin: 0 24/@r;
     margin-top: 80/@r;
+    display: flex;
 }
 .button{
     margin-bottom: 20/@r;
+}
+.button + .button{
+  margin-left: 20/@r;
+}
+.text{
+  margin: 0 24/@r;
+  padding: 20/@r;
+  border: 1px solid #d5d5d5;
+  margin-top: 30/@r;
+  border-radius: 6/@r;
+  font-size: 28/@r;
+  color: #333333;
+  font-weight: 500;
+  min-height: 80/@r;
 }
 </style>

@@ -18,7 +18,15 @@ router.post("/send",
 router.post("/agree", 
     authMiddleware(),
     validatorMiddleware({
-        invitationId: [{required: true, message: "缺少邀请id"}]
+        id: [{required: true, message: "缺少必要参数"}]
+    }),
+    invitationController.agree
+);
+// 拒绝添加
+router.post("/refuse", 
+    authMiddleware(),
+    validatorMiddleware({
+        id: [{required: true, message: "缺少必要参数"}]
     }),
     invitationController.agree
 );
