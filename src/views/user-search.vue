@@ -46,7 +46,9 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    right: 0;
+    margin: 0 auto;
+    width: 750/@r;
     padding: 0 24/@r;
     height: 120/@r;
     background-color: @white;

@@ -43,8 +43,10 @@ export default {
     position: fixed;
     left: 0;
     top: 0;
+    right: 0;
     width: 750/@r;
     height: 60/@r;
+    margin: 0 auto;
     text-align: center;
     line-height: 60/@r;
     color: @white;

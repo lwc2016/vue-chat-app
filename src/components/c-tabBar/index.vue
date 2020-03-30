@@ -41,8 +41,10 @@ export default {
 .tabbar{
     position: fixed;
     left: 0;
+    right: 0;
+    margin: 0 auto;
     bottom: 0;
-    width: 100%;
+    width: 750/@r;
     height: 100/@r;
     border-top: 1px solid #d5d5d5;
     background-color: @white;
