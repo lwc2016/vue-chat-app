@@ -23,8 +23,18 @@ router.post("/agree",
     invitationController.agree
 );
 
+// 详情
+router.post("/detail", 
+    authMiddleware(), 
+    validatorMiddleware({
+        id: [{required: true, message: "缺少必要参数！"}]
+    }),
+    invitationController.detail
+);
+
 router.post("/list", (ctx) => {
     ctx.body = "list";
 })
+
 
 module.exports = router;

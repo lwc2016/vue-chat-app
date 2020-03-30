@@ -8,10 +8,10 @@ function install (Vue) {
             console.log('连接上服务器了')
           }
           ws.onmessage = (message) => {
-            console.log('接收到消息了')
             // 解析信息
             const data = JSON.parse(message.data)
             data.isRead = this.$route.name === 'chat-room'
+            console.log(data)
             // 将信息推送到message中
             this.$store.commit('message/push', data)
           }

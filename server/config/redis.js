@@ -1,4 +1,13 @@
 const redis = require("redis");
-const client = redis.createClient(6379, "localhost")
+// 用户缓存
+const mainClient = redis.createClient(6379, "localhost");
+// 订阅
+const subscribeClient = redis.createClient(6379, "localhost");
+// 发布
+const publishClient = redis.createClient(6379, "localhost");
 
-module.exports = client;
+module.exports = {
+    mainClient,
+    subscribeClient,
+    publishClient
+}

@@ -1,10 +1,36 @@
 const db = require("../config/db");
+const { publishClient } = require("../config/redis");
 
 // 添加邀请
 exports.send = async (ctx, next) => {
     const { id: fromId } = ctx.session.user;
-    const { userId: toId } = ctx.request.body;
-    await db.query("insert into invitations_table ( fromId, toId ) values ( ?, ? )", [fromId, toId]);
+    const { userId: toId, remarks } = ctx.request.body;
+    // 先判断是否是好友
+    const [ friend ] = await db.query("select * from friends_table where fromId = ? and toId = ? and isValid = 1", [fromId, toId]);
+    if(friend){
+        return ctx.body = {status: 400, message: "他已经是您的好友了，不能再添加了！"};
+    }
+    // 判断是否有邀请，但还未审核的
+    const [ invitation ] = await db.query("select * from invitations_table where fromId = ? and toId = ? and status = 'waiting' and isValid = 1", [fromId, toId])
+    if(invitation){
+        return ctx.body = {status: 400, message: "您已经发送了添加请求，等待验证！"};
+    }
+    console.log("remarks: ", remarks);
+    await db.query("insert into invitations_table ( fromId, toId, remarks ) values ( ?, ?, ? )", [fromId, toId, remarks]);
+    // 通过redis发布消息
+    const [ invitation2 ] = await db.query(`
+        select 
+        invitations_table.id as id, 
+        nickName, 
+        avatar, 
+        fromId, 
+        toId,
+        users_table.remarks as remarks
+        from invitations_table left join users_table 
+        on invitations_table.fromId = users_table.id 
+        where fromId = ? and toId = ?;`, [fromId, toId]) || {};
+    console.log(fromId, toId, invitation2);    
+    publishClient.publish("invitation", JSON.stringify({type: "system", subType: "invitation_received", ...invitation2}));
     ctx.body = {status: 200, result: "", message: ""};
 };
 
@@ -33,5 +59,26 @@ exports.refuse = async (ctx, next) => {
 // 邀请记录
 exports.log = async (ctx, next) => {
     
+};
+
+// 邀请详情
+exports.detail = async (ctx, next) => {
+    const { id: userId } = ctx.session.user;
+    const { id } = ctx.request.body;
+    console.log("id:", id);
+    const [ invitation ] = await db.query(`
+    select 
+    invitations_table.id as id, 
+    name,
+    nickName, 
+    avatar, 
+    fromId, 
+    toId,
+    users_table.remarks as remarks,
+    invitations_table.remarks as invitationRemarks
+    from invitations_table left join users_table 
+    on invitations_table.fromId = users_table.id 
+    where invitations_table.id = ? and toId = ?;`, [id, userId]) || {};
+    ctx.body = { status: 200, result: invitation };
 };
 

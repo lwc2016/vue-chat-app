@@ -3,7 +3,7 @@
         <c-profile :data="detail" />
         <c-form class="form">
            <c-form-item>
-            <c-textarea v-model="remarks" placeholder="请填写备注" />
+            <c-textarea placeholder="请填写备注" />
            </c-form-item>
         </c-form>
         <div class="buttons">
@@ -13,13 +13,11 @@
     </div>
 </template>
 <script>
-import { userDetail } from '@/services/user'
-import { invitationSend } from '@/services/invitation'
+import { invitationSend, invitationDetail } from '@/services/invitation'
 export default {
   data () {
     return {
-      detail: {},
-      remarks: ''
+      detail: {}
     }
   },
   created () {
@@ -27,11 +25,11 @@ export default {
   },
   methods: {
     async fetchDetail () {
-      this.detail = await userDetail({ id: this.$route.params.id })
+      this.detail = await invitationDetail({ id: this.$route.params.id })
     },
     async handleAdd () {
       try {
-        await invitationSend({ userId: this.detail.id, remarks: this.remarks })
+        await invitationSend({ userId: this.detail.id })
         this.$message.success('邀请发送成功！')
       } catch (error) {
         console.log(error)

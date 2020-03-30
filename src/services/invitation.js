@@ -4,3 +4,5 @@ import request from '@/utils/request'
 export const invitationSend = data => request.post('/invitation/send', data)
 // 邀请记录
 export const invitationLog = () => request.post('/invitation/log', {})
+// 邀请详情
+export const invitationDetail = data => request.post('/invitation/detail', data)

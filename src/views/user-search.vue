@@ -5,9 +5,17 @@
             <c-button @click="handleSearch" class="search">搜索</c-button>
         </div>
         <div class="content">
-            <c-title>搜索结果</c-title>
+            <c-title>搜索结果（<span class="red">{{total}}</span>条）</c-title>
             <c-session>
-                <c-friend v-for="item in list" :key="item.id" :data="item" />
+                <c-list-item
+                  v-for="item in list"
+                  :key="item.id"
+                  :path="`/user/${item.id}`"
+                  :imgUrl="item.avatar"
+                >
+                  <template v-slot:primary>{{item.nickName}}</template>
+                  <template v-slot:secondary><span>用户名：</span>{{item.name}}</template>
+                </c-list-item>
             </c-session>
         </div>
     </div>
@@ -24,6 +32,11 @@ export default {
   methods: {
     async handleSearch () {
       this.list = await userSearch({ keyword: this.keyword })
+    }
+  },
+  computed: {
+    total () {
+      return this.list.length
     }
   }
 }
@@ -47,5 +60,8 @@ export default {
 }
 .content{
     margin-top: 120/@r;
+}
+.red{
+  color: @danger;
 }
 </style>

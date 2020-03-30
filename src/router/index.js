@@ -9,7 +9,9 @@ import FriendList from '@/views/friend-list'
 import Person from '@/views/person'
 import PersonEdit from '@/views/person-edit'
 import FriendDetail from '@/views/friend-detail'
-import FriendSearch from '@/views/friend-search'
+import UserSearch from '@/views/user-search'
+import UserDetail from '@/views/user-detail'
+import InvitationDetail from '@/views/invitation-detail'
 import ChatRoom from '@/views/chat-room'
 
 Vue.use(VueRouter)
@@ -31,9 +33,11 @@ const routes = [
           { path: '/person', component: Person, name: 'person' }
         ]
       },
-      { path: '/friend/search', component: FriendSearch, name: 'friend-search' },
+      { path: '/user/search', component: UserSearch, name: 'user-search' },
+      { path: '/user/:id', component: UserDetail, name: 'user-detail' },
       { path: '/friend/:id', component: FriendDetail, name: 'friend-detail' },
       { path: '/chatRoom/:id', component: ChatRoom, name: 'chat-room' },
+      { path: '/invitation/:id', component: InvitationDetail, name: 'invitation-detail' },
       { path: '/person/edit', component: PersonEdit, name: 'person-edit' }
     ]
   }

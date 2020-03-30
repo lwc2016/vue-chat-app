@@ -1,7 +1,7 @@
 <template>
     <div>
         <c-session>
-            <c-session-item>添加好友</c-session-item>
+            <c-session-item path="/user/search">添加好友</c-session-item>
         </c-session>
         <h3 class="title">我的朋友</h3>
         <c-session>
