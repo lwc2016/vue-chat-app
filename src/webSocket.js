@@ -3,7 +3,8 @@ function install (Vue) {
     methods: {
       createWebSocket () {
         if (!Vue.prototype.$ws) {
-          const ws = new WebSocket('ws://chatroom.supersummer.top:3030')
+          const url = process.env.NODE_ENV === 'development' ? 'ws://localhost:3030' : 'ws://chatroom.supersummer.top:3030'
+          const ws = new WebSocket(url)
           ws.onopen = () => {
             // console.log('连接上服务器了')
           }

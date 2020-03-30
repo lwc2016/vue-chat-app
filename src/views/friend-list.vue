@@ -3,7 +3,7 @@
         <c-session>
             <c-session-item path="/user/search">添加好友</c-session-item>
         </c-session>
-        <div v-if="$store.getters['friend/total'] > 0">
+        <div v-if="$store.state.friend.list.length > 0">
             <h3 class="title">我的朋友</h3>
             <c-session>
                 <c-list-item
