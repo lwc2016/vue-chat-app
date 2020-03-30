@@ -27,6 +27,12 @@ export default {
     async handleAgree () {
       await invitationAgree({ id: this.$route.params.id })
       this.$message.success('好友添加成功！')
+      // 发送消息
+      this.$ws.send(JSON.stringify({ content: '同意添加了，开始聊天吧！', toId: this.detail.fromId, type: 'text' }))
+      // 重新获取好友列表
+      this.$store.dispatch('friend/fetchList')
+      // 进入聊天页面
+      this.$router.push(`/chatroom/${this.detail.fromId}`)
     },
     async handleRefuse () {
       await invitationRefuse({ id: this.$route.params.id })

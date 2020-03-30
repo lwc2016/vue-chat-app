@@ -6,7 +6,7 @@
         }"
     >
         <div class="avatar-box">
-            <img class="avatar" :src='data.avatar' />
+            <img class="avatar" :src='data.avatar || avatarIcon' />
         </div>
         <div class="message-content">
             <div :class="isSelf ? 'arrow-right' : 'arrow-left'"></div>
@@ -15,11 +15,17 @@
     </div>
 </template>
 <script>
+import avatarIcon from '@/assets/avatar.png'
 export default {
   props: {
     data: {
       type: Object,
       default: () => ({})
+    }
+  },
+  data () {
+    return {
+      avatarIcon
     }
   },
   computed: {

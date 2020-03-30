@@ -20,13 +20,11 @@ request.interceptors.response.use(function (response) {
     return Promise.reject(new Error('错误'))
   }
   if (data.status !== 200) {
-    console.log(data.message)
     create(message, { type: 'error', text: data.message }).show()
     return Promise.reject(data.message)
   }
   return data.result
 }, function (error) {
-  console.log(error)
   create(message, { type: 'error', text: error }).show()
   return Promise.reject(error)
 })

@@ -28,7 +28,6 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-
 .footer{
     position: fixed;
     width: 750/@r;

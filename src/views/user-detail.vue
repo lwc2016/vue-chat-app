@@ -8,7 +8,6 @@
         </c-form>
         <div class="buttons">
             <c-button @click='handleAdd' type="primary" class="button">添加好友</c-button>
-            <c-button type="danger" class="button">删除好友</c-button>
         </div>
     </div>
 </template>

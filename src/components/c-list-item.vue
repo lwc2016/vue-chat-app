@@ -11,12 +11,20 @@
                 <div v-if="count" class="count">{{count}}</div>
             </div>
             <div class="info">
-                <h3 class="name">
-                    <slot name='primary'></slot>
-                </h3>
-                <p class="content">
-                    <slot name="secondary"></slot>
-                </p>
+                <div class="info-item">
+                    <h3 class="name">
+                      <slot name='primary'></slot>
+                    </h3>
+                    <slot name="rightTop"></slot>
+                </div>
+                <div class="info-item">
+                    <p class="content">
+                        <slot name="secondary"></slot>
+                    </p>
+                    <p class="content">
+                        <slot name="rightBottom"></slot>
+                    </p>
+                </div>
             </div>
         </router-link>
     </div>
@@ -67,6 +75,7 @@ export default {
     }
     .info{
         margin-left: 20/@r;
+        flex: 1;
     }
     .name{
         font-size: 30/@r;
@@ -77,6 +86,10 @@ export default {
         font-size: 24/@r;
         color: #666666;
         margin-top: 16/@r;
+    }
+    .info-item{
+        display: flex;
+        justify-content: space-between;
     }
 }
 .list-item + .list-item{

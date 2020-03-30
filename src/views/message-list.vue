@@ -12,9 +12,10 @@
             >
               <template v-slot:primary>{{item.nickName}}</template>
               <template v-slot:secondary>
-                <div v-if="item.subType === 'invitation_received'">请求加为好友，({{item.remarks}})</div>
+                <div v-if="item.subType === 'invitation_received'">请求加为好友，<span v-if="item.remarks">({{item.remarks}})</span></div>
                 <div v-if="item.subType === 'invitation_refused'">拒绝加你为好友！</div>
               </template>
+              <template v-slot:rightBottom>{{item.createdTime | formatDateTime }}</template>
             </c-list-item>
           </c-session>
         </div>
@@ -30,6 +31,7 @@
               >
                 <template v-slot:primary>{{item.nickName}}</template>
                 <template v-slot:secondary>{{item.content}}</template>
+                <template v-slot:rightBottom>{{item.createdTime | formatDateTime }}</template>
               </c-list-item>
           </c-session>
         </div>

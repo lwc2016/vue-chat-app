@@ -3,7 +3,7 @@
         <c-profile :data="detail" />
         <c-form class="form">
            <c-form-item class="form-group">
-            <c-input v-model="detail.remarkName" placeholder="填写备注" />
+            <c-input v-model="remark" placeholder="填写备注" />
             <c-button @click="handleUpdate" class="save-btn">保存</c-button>
            </c-form-item>
         </c-form>
@@ -20,7 +20,8 @@ import { friendDetail, friendUpdate } from '@/services/friend'
 export default {
   data () {
     return {
-      detail: {}
+      detail: {},
+      remark: ''
     }
   },
   created () {
@@ -29,11 +30,13 @@ export default {
   methods: {
     async fetchDetail () {
       this.detail = await friendDetail({ id: this.$route.params.id })
+      this.remark = this.detail.remarkName
     },
     async handleUpdate () {
-      await friendUpdate({ id: this.$route.params.id, remarkName: this.detail.remarkName })
+      await friendUpdate({ id: this.$route.params.id, remarkName: this.remark })
       this.$store.dispatch('friend/fetchList')
       this.$message.success('修改备注成功！')
+      this.fetchDetail()
     }
   }
 }
