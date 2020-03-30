@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <c-form ref="form" :form="form" :rules="rules" class="form">
             <c-form-item>
               <c-input v-model="form.name" type="text" placeholder="用户名" />
@@ -60,6 +60,12 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.container{
+  width: 750/@r;
+  margin: 0 auto;
+  min-height: 100vh;
+  box-shadow: 0 0 5px #999999;
+}
 .form{
     padding-top: 80/@r;
 }
