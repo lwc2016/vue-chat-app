@@ -13,7 +13,7 @@
     "@koa/multer": "^2.0.2",
     "ali-oss": "^6.5.1",
     "async-validator": "^3.2.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bluebird": "^3.7.2",
     "co-mysql": "^1.0.0",
     "core-js": "^3.6.4",
